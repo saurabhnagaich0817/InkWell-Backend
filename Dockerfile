@@ -13,4 +13,9 @@ RUN dotnet publish "InkWell.API.Gateway.csproj" -c Release -o /app/publish /p:Us
 FROM mcr.microsoft.com/dotnet/aspnet:8.0 AS final
 WORKDIR /app
 COPY --from=build /app/publish .
+
+# Back4App needs explicit EXPOSE
+EXPOSE 8080
+ENV ASPNETCORE_URLS=http://*:8080
+
 ENTRYPOINT ["dotnet", "InkWell.API.Gateway.dll"]
