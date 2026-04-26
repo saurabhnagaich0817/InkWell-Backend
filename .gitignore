@@ -39,7 +39,8 @@ Thumbs.db
 # appsettings.json 
 
 # ======================
-# Others
+# Others & Separations
 # ======================
+Frontend/
 coverage/
 .dotnet/

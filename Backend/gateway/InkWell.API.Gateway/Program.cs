@@ -81,11 +81,12 @@ builder.Services.AddAuthentication(options =>
 builder.Services.AddAuthorization();
 
 // 4a. CORS — Allow Angular frontend (localhost:4200) to call the Gateway
+var allowedOrigins = builder.Configuration.GetSection("Cors:AllowedOrigins").Get<string[]>() ?? new[] { "http://localhost:4200" };
 builder.Services.AddCors(options =>
 {
     options.AddPolicy("AllowAngular", policy =>
     {
-        policy.WithOrigins("http://localhost:4200")   // Angular dev server
+        policy.WithOrigins(allowedOrigins)   // Angular dev server + Netlify
               .AllowAnyHeader()
               .AllowAnyMethod()
               .AllowCredentials();
